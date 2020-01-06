@@ -3,8 +3,8 @@
 return [
     'baseUrl' => '',
     'production' => false,
-    'siteName' => 'Blog Starter Template',
-    'siteDescription' => 'Generate an elegant blog with Jigsaw',
+    'siteName' => 'João Santos',
+    'siteDescription' => 'Personal website',
     'siteAuthor' => 'João Santos',
 
     // collections
