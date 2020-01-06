@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: Install Composer Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Install NPM Dependencies
@@ -30,8 +32,3 @@ jobs:
           git subtree split --prefix build_production -b master
           git push -f origin master:master
           git branch -D master
-          git checkout -b temp origin/master
-          git commit --amend --reset-author
-          git push origin master
-          git checkout master
-          git branch -D temp
