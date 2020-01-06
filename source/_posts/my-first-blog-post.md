@@ -7,4 +7,4 @@ description: This is your first blog post.
 cover_image: /assets/img/post-cover-image-2.png
 ---
 
-Testing firs post with secret.
+Testing first post with secret.
