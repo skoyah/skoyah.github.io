@@ -15,10 +15,10 @@
         class="flex rounded-full h-64 w-64 bg-contain mx-auto md:float-right my-6 md:ml-10">
 
     <p class="mb-6">
-        Before switching careers, I was a marine biologist with a special interest in shark research. Now, I work as a full-time web developer with PHP, Laravel and Vue.
+        Before switching careers, I was a marine biologist with a special interest in shark research. Now, I work as a full-time web developer with PHP, Laravel and Vue at <a href="https://www.pdmfc.com/" target="_blank">PDMFC</a>.
     </p>
 
     <p class="mb-6">
-        You can find me on twitter at <a href="https://twitter.com/joaoecoceanus">@skoyah</a>
+        You can find me on twitter <a href="https://twitter.com/joaoecoceanus">@skoyah</a>
     </p>
 @endsection
