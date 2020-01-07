@@ -3,9 +3,9 @@ extends: _layouts.post
 section: content
 title: New year, new goals
 date: 2019-01-07
-description: This is your first blog post.
+description: Hello world! My first blog post.
 cover_image: /assets/img/new-decade.png
-featured: true
+featured: false
 ---
 
 It has only been 9 months since I landed my first job as a web developer but it feels like I have accomplished a lot of unexpected (but desired) goals.
