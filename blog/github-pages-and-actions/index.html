@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="Personal website">
+
+        <meta property="og:title" content="Trigger Github Pages with Actions | João Santos"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://skoyah.github.io/blog/github-pages-and-actions"/>
+        <meta property="og:description" content="Personal website" />
+
+        <title>Trigger Github Pages with Actions | João Santos</title>
+
+        <link rel="home" href="https://skoyah.github.io">
+        <link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="João Santos Atom Feed">
+
+            <meta property="og:title" content="Trigger Github Pages with Actions" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://skoyah.github.io/blog/github-pages-and-actions"/>
+    <meta property="og:description" content="Using tokens to authorize GitHub Pages building process with automated scripts." />
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=ca43cfac0ce86d2404e3">
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen bg-gray-100 text-gray-800 leading-normal font-sans">
+        <header class="flex items-center shadow bg-white border-b h-24 py-4" role="banner">
+            <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="João Santos home" class="inline-flex items-center">
+                        <img class="h-8 md:h-10 mr-3" src="/assets/img/logo.svg" alt="João Santos logo" />
+
+                        <h1 class="text-lg md:text-2xl text-blue-800 font-semibold hover:text-blue-600 my-0">João Santos</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex flex-1 justify-end items-center">
+                    <search></search>
+
+                    <nav class="hidden lg:flex items-center justify-end text-lg">
+    <a title="João Santos Blog" href="/blog"
+        class="ml-6 text-gray-700 hover:text-blue-600 ">
+        Blog
+    </a>
+
+    <a title="João Santos About" href="/about"
+        class="ml-6 text-gray-700 hover:text-blue-600 ">
+        About
+    </a>
+
+    <a title="João Santos Contact" href="/contact"
+        class="ml-6 text-gray-700 hover:text-blue-600 ">
+        Contact
+    </a>
+</nav>
+
+                    <button class="flex justify-center items-center bg-blue-500 border border-blue-500 h-10 px-5 rounded-full lg:hidden focus:outline-none"
+    onclick="navMenu.toggle()"
+>
+    <svg id="js-nav-menu-show" xmlns="http://www.w3.org/2000/svg"
+        class="fill-current text-white h-9 w-4" viewBox="0 0 32 32"
+    >
+        <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/>
+    </svg>
+
+    <svg id="js-nav-menu-hide" xmlns="http://www.w3.org/2000/svg"
+        class="hidden fill-current text-white h-9 w-4" viewBox="0 0 36 30"
+    >
+        <polygon points="32.8,4.4 28.6,0.2 18,10.8 7.4,0.2 3.2,4.4 13.8,15 3.2,25.6 7.4,29.8 18,19.2 28.6,29.8 32.8,25.6 22.2,15 "/>
+    </svg>
+</button>
+
+                </div>
+            </div>
+        </header>
+
+        <nav id="js-nav-menu" class="nav-menu hidden lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="João Santos Blog"
+                href="/blog"
+                class="nav-menu__item hover:text-blue-500 "
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="João Santos About"
+                href="/about"
+                class="nav-menu__item hover:text-blue-500 "
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="João Santos Contact"
+                href="/contact"
+                class="nav-menu__item hover:text-blue-500 "
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+
+        <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
+                        <img src="/assets/img/processing-data.png" alt="Trigger Github Pages with Actions cover image" class="mb-2">
+    
+    <h1 class="leading-none mb-2">Trigger Github Pages with Actions</h1>
+
+    <p class="text-gray-700 text-xl md:mt-0">João Santos  •  January 8, 2019</p>
+
+    
+    <div class="border-b border-blue-200 mb-10 pb-4" v-pre>
+        <p>In the <a href="https://skoyah.github.io/blog/new-year-new-goals/">last post</a> I briefly wrote about getting started this new year with creating my own blog. For that, I’m using the <a href="https://pages.github.com/">GitHub Pages</a> to host the blog since is a free service.</p>
+<div class="flex justify-center">
+    <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Published! You can read it at <a href="https://t.co/3J783VDbui">https://t.co/3J783VDbui</a></p>— James Brooks (@jbrooksuk) <a href="https://twitter.com/jbrooksuk/status/1212397225843793920?ref_src=twsrc%5Etfw">January 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<p>This tweet from James Brooks introduced me to <a href="https://jigsaw.tighten.co/" target="_blank">Jigsaw</a>, a static site generator, and <a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> to automate the deployment process.</p>
+<p>I followed the GitHub workflow configuration setup from James but ran into some issues where the website build was failing even though the files were being correctly committed to the <code>master</code> branch.</p>
+<p>It turns out that <a href="https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869" target="_blank">git commands used in actions do not trigger the build process</a>. The token used by Github Actions - <code>GITHUB_TOKEN</code> - is not enough to start the build.</p>
+<p>In order to initialize a new build everytime you push to the <code>master</code> (or <code>gh-pages</code>) branch you need some extra steps.</p>
+<ul>
+<li>
+<p>First, you have to <a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)" target="_blank">create a personal access token</a> (<strong>PAT</strong>) that will be used as the new token by your workflow.</p>
+</li>
+<li>
+<p>Second, you must <a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets" target="_blank">create a new secret for your repo</a> that will contain the PAT value.</p>
+</li>
+<li>
+<p>Finally, you need to reference the secret in the workflow config file.</p>
+</li>
+</ul>
+<p>As an example, here is the final workflow file after creating up a repo secret named <code>GH_PAGES_TOKEN</code>:</p>
+<pre><code class="language-yaml">name: Build &amp; Publish
+
+on:
+  push:
+    branches:
+      - source
+  schedule:
+    - cron: "0 0 * * 1-5"
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAGES_TOKEN }}
+      - name: Install Composer Dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Install NPM Dependencies
+        run: npm install
+      - name: Build Site
+        run: npm run production
+      - name: Stage Files
+        run: git add -f build_production
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git commit -m "Build for deploy"
+      - name: Publish
+        run: |
+          git subtree split --prefix build_production -b master
+          git push -f origin master:master
+          git branch -D master</code></pre>
+<p>And we're done! Now everytime you commit your work to your develop branch, the automated deployment action will successfully trigger the GitHub Pages building process.</p>    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://skoyah.github.io/blog/new-year-new-goals" title="Older Post: New year, new goals">
+                    &LeftArrow; New year, new goals
+                </a>
+                    </div>
+
+        <div>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="bg-white text-center text-sm mt-12 py-4" role="contentinfo">
+            <ul class="flex flex-col md:flex-row justify-center list-none">
+                <li class="md:mr-2">
+                    &copy; <a href="https://twitter.com/joaoecoceanus" title="João Santos" target="_blank">João Santos</a> 2020
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=1025297ffb6c3f7490b9"></script>
+
+        <script>
+    const navMenu = {
+        toggle() {
+            const menu = document.getElementById('js-nav-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('lg:block');
+            document.getElementById('js-nav-menu-hide').classList.toggle('hidden');
+            document.getElementById('js-nav-menu-show').classList.toggle('hidden');
+        },
+    }
+</script>
+    </body>
+</html>

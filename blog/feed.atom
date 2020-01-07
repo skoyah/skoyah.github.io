@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>João Santos</title>
+    <link href="https://skoyah.github.io" />
+    <link type="application/atom+xml" rel="self" href="https://skoyah.github.io/blog/feed.atom" />
+    <updated>2020-01-07T18:29:55+00:00</updated>
+    <id>https://skoyah.github.io/blog/feed.atom</id>
+    <author>
+        <name>João Santos</name>
+    </author>
+                <entry>
+    <id>https://skoyah.github.io/blog/github-pages-and-actions</id>
+    <link type="text/html" rel="alternate" href="https://skoyah.github.io/blog/github-pages-and-actions" />
+    <title>Trigger Github Pages with Actions</title>
+    <published>2019-01-08T00:00:00+00:00</published>
+    <updated>2019-01-08T00:00:00+00:00</updated>
+    <author>
+        <name>João Santos</name>
+    </author>
+    <summary type="html">In the last post I briefly wrote about getting started this new year with creating my own blog. For that, I’m using the GitHub Pages to host the blog since is a free service.
+
+    Published! You can read it at https://t.co/3J783VDbui— James Brooks......</summary>
+    <content type="html"><![CDATA[
+        <p>In the <a href="https://skoyah.github.io/blog/new-year-new-goals/">last post</a> I briefly wrote about getting started this new year with creating my own blog. For that, I’m using the <a href="https://pages.github.com/">GitHub Pages</a> to host the blog since is a free service.</p>
+<div class="flex justify-center">
+    <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Published! You can read it at <a href="https://t.co/3J783VDbui">https://t.co/3J783VDbui</a></p>— James Brooks (@jbrooksuk) <a href="https://twitter.com/jbrooksuk/status/1212397225843793920?ref_src=twsrc%5Etfw">January 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<p>This tweet from James Brooks introduced me to <a href="https://jigsaw.tighten.co/" target="_blank">Jigsaw</a>, a static site generator, and <a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> to automate the deployment process.</p>
+<p>I followed the GitHub workflow configuration setup from James but ran into some issues where the website build was failing even though the files were being correctly committed to the <code>master</code> branch.</p>
+<p>It turns out that <a href="https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869" target="_blank">git commands used in actions do not trigger the build process</a>. The token used by Github Actions - <code>GITHUB_TOKEN</code> - is not enough to start the build.</p>
+<p>In order to initialize a new build everytime you push to the <code>master</code> (or <code>gh-pages</code>) branch you need some extra steps.</p>
+<ul>
+<li>
+<p>First, you have to <a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)" target="_blank">create a personal access token</a> (<strong>PAT</strong>) that will be used as the new token by your workflow.</p>
+</li>
+<li>
+<p>Second, you must <a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets" target="_blank">create a new secret for your repo</a> that will contain the PAT value.</p>
+</li>
+<li>
+<p>Finally, you need to reference the secret in the workflow config file.</p>
+</li>
+</ul>
+<p>As an example, here is the final workflow file after creating up a repo secret named <code>GH_PAGES_TOKEN</code>:</p>
+<pre><code class="language-yaml">name: Build &amp; Publish
+
+on:
+  push:
+    branches:
+      - source
+  schedule:
+    - cron: "0 0 * * 1-5"
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAGES_TOKEN }}
+      - name: Install Composer Dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Install NPM Dependencies
+        run: npm install
+      - name: Build Site
+        run: npm run production
+      - name: Stage Files
+        run: git add -f build_production
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git commit -m "Build for deploy"
+      - name: Publish
+        run: |
+          git subtree split --prefix build_production -b master
+          git push -f origin master:master
+          git branch -D master</code></pre>
+<p>And we're done! Now everytime you commit your work to your develop branch, the automated deployment action will successfully trigger the GitHub Pages building process.</p>    ]]></content>
+</entry>
+            <entry>
+    <id>https://skoyah.github.io/blog/new-year-new-goals</id>
+    <link type="text/html" rel="alternate" href="https://skoyah.github.io/blog/new-year-new-goals" />
+    <title>New year, new goals</title>
+    <published>2019-01-07T00:00:00+00:00</published>
+    <updated>2019-01-07T00:00:00+00:00</updated>
+    <author>
+        <name>João Santos</name>
+    </author>
+    <summary type="html">It has only been 9 months since I landed my first job as a web developer but it feels like I have accomplished a lot of unexpected (but desired) goals.
+So, I’ve decided to start this new decade with some achievable goals in mind, which I intend to get......</summary>
+    <content type="html"><![CDATA[
+        <p>It has only been 9 months since I landed my first job as a web developer but it feels like I have accomplished a lot of unexpected (but desired) goals.
+So, I’ve decided to start this new decade with some achievable goals in mind, which I intend to get done by the end of 2020.</p>
+<p>One of those goals was to commit myself to write my thoughts as blog articles as my personal web developer diary and also to share them with anyone who might find them interesting or helpful.</p>
+<p>A few days ago I stumbled upon this tweet from <a href="https://twitter.com/jbrooksuk">@jbrooksuk</a>:</p>
+<div class="flex justify-center">
+    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Published! You can read it at <a href="https://t.co/3J783VDbui">https://t.co/3J783VDbui</a></p>— James Brooks (@jbrooksuk) <a href="https://twitter.com/jbrooksuk/status/1212397225843793920?ref_src=twsrc%5Etfw">January 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<p>That was the trigger for me to start writing my own personal blog using GitHub pages.
+I followed a similar setup path as James but still encountered some issues during deployment which I’ll explain in a future post.</p>
+<p>Until then, happy 2020!</p>    ]]></content>
+</entry>
+    </feed>
