@@ -19,6 +19,6 @@
     </p>
 
     <p class="mb-6">
-        You can find me at twitter at <a href="">@skoyah</a>
+        You can find me at twitter at <a href="https://twitter.com/joaoecoceanus">@skoyah</a>
     </p>
 @endsection
